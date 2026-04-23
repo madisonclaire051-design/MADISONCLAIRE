@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madison Claire | Strategic Book Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--gold:#C9A84C;--gold2:#E8D48B;--gold3:#A07D2E;
+--navy:#0A1628;--navy2:#1A2A4A;--navy3:#122040;
+--cream:#FDF8F0;--white:#fff;
+--dark:#1A1A2E;--mid:#4A4A5A;--light:#7A7A8A;
+--shadow:0 20px 60px rgba(0,0,0,0.15);
+--shadowG:0 15px 50px rgba(201,168,76,0.2);
+--ease:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+html{scroll-behavior:smooth;overflow-x:hidden;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.7}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--gold);color:var(--navy)}
+
+#preloader{position:fixed;inset:0;background:var(--navy);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.pl-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:24px;animation:plGlow 2s ease infinite alternate;box-shadow:0 0 40px rgba(201,168,76,0.25)}
+@keyframes plGlow{0%{box-shadow:0 0 20px rgba(201,168,76,0.2);transform:scale(1)}100%{box-shadow:0 0 60px rgba(201,168,76,0.5);transform:scale(1.04)}}
+.pl-name{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--gold);letter-spacing:4px;margin-bottom:6px;animation:plFade 1.5s ease infinite alternate}
+.pl-sub{font-family:'Montserrat',sans-serif;font-size:0.6rem;color:rgba(201,168,76,0.45);letter-spacing:5px;text-transform:uppercase;margin-bottom:40px}
+.pl-track{width:220px;height:2px;background:rgba(201,168,76,0.12);border-radius:10px;overflow:hidden}
+.pl-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;animation:plLoad 2.4s ease forwards}
+@keyframes plLoad{0%{width:0%}100%{width:100%}}
+.pl-pct{font-family:'Montserrat',sans-serif;font-size:0.72rem;color:rgba(201,168,76,0.35);letter-spacing:2px;margin-top:18px}
+@keyframes plFade{0%{opacity:0.5}100%{opacity:1}}
+
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:9999;padding:20px 0;transition:var(--ease);background:transparent}
+.navbar.scrolled{background:rgba(10,22,40,0.97);padding:13px 0;backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.25);border-bottom:1px solid rgba(201,168,76,0.07)}
+.nav-inner{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:13px}
+.nav-brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);transition:var(--ease)}
+.nav-brand:hover img{transform:scale(1.08);box-shadow:0 0 22px rgba(201,168,76,0.4)}
+.nav-brand-text .name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--gold);letter-spacing:1px;display:block}
+.nav-brand-text .sub{font-family:'Montserrat',sans-serif;font-size:0.55rem;color:rgba(201,168,76,0.5);letter-spacing:3px;text-transform:uppercase;display:block}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:500;color:rgba(255,255,255,0.78);text-transform:uppercase;letter-spacing:2px;position:relative;padding:5px 0;transition:var(--ease)}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--gold);transition:width 0.4s ease}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta-btn{color:var(--navy)!important;background:linear-gradient(135deg,var(--gold),var(--gold2));padding:11px 26px!important;border-radius:5px;font-weight:600!important;letter-spacing:1.5px!important}
+.nav-cta-btn::after{display:none!important}
+.nav-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.4);color:var(--navy)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:10000}
+.hamburger span{width:26px;height:2px;background:var(--gold);transition:var(--ease);display:block}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+.hero{min-height:100vh;background:linear-gradient(145deg,#060E1A 0%,var(--navy) 35%,var(--navy3) 65%,var(--navy2) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 40px 90px}
+#particles{position:absolute;inset:0;overflow:hidden;z-index:1}
+.dot{position:absolute;border-radius:50%;background:rgba(201,168,76,0.22);animation:dotRise linear infinite}
+@keyframes dotRise{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:1}92%{opacity:0.8}100%{transform:translateY(-10vh) rotate(720deg);opacity:0}}
+.hero-overlay{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 40%,transparent 0%,rgba(10,22,40,0.5) 100%)}
+.hero-glow-bg{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:700px;height:700px;z-index:2;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);animation:glowPulse 7s ease-in-out infinite alternate}
+@keyframes glowPulse{0%{transform:translateX(-50%) scale(1);opacity:0.4}100%{transform:translateX(-50%) scale(1.4);opacity:1}}
+.hero-content{position:relative;z-index:10;max-width:920px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:11px;padding:10px 26px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.22);border-radius:50px;margin-bottom:36px;animation:fadeUp 1s ease 0.3s both}
+.badge-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.7)}}
+.hero-badge span{font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.hero h1{font-family:'Playfair Display',serif;font-size:4rem;font-weight:700;color:var(--white);line-height:1.18;margin-bottom:18px;animation:fadeUp 1s ease 0.5s both}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.5);margin-bottom:28px;animation:fadeUp 1s ease 0.7s both}
+.hero-desc{font-size:1.04rem;color:rgba(255,255,255,0.58);line-height:1.9;max-width:710px;margin:0 auto 45px;animation:fadeUp 1s ease 0.9s both}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;animation:fadeUp 1s ease 1.1s both}
+.hero-email{margin-top:34px;animation:fadeUp 1s ease 1.3s both}
+.hero-email a{font-size:0.82rem;color:rgba(201,168,76,0.5);display:inline-flex;align-items:center;gap:8px;transition:var(--ease)}
+.hero-email a:hover{color:var(--gold)}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;animation:fadeUp 1s ease 1.6s both;z-index:10}
+.hero-scroll span{font-family:'Montserrat',sans-serif;font-size:0.55rem;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase}
+.scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAni 2.2s ease infinite}
+@keyframes scrollAni{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.4);opacity:0.2}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:translateY(0)}}
+
+.btn-gold{display:inline-flex;align-items:center;gap:11px;padding:17px 42px;background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--navy);font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:5px;border:none;cursor:pointer;position:relative;overflow:hidden;transition:var(--ease)}
+.btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent);transition:left 0.6s ease}
+.btn-gold:hover::before{left:100%}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(201,168,76,0.4)}
+.btn-outline{display:inline-flex;align-items:center;gap:11px;padding:17px 42px;background:transparent;color:var(--gold);font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;border-radius:5px;border:1.5px solid rgba(201,168,76,0.35);transition:var(--ease);cursor:pointer}
+.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);transform:translateY(-3px)}
+
+.trust-bar{background:#060E1A;overflow:hidden;padding:30px 0;border-top:1px solid rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.08)}
+.trust-track{display:flex;animation:trustMove 38s linear infinite;width:max-content}
+.trust-item{display:flex;align-items:center;gap:11px;padding:0 42px;white-space:nowrap;flex-shrink:0}
+.trust-item i{color:var(--gold);font-size:0.7rem}
+.trust-item span{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:600;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:3px}
+@keyframes trustMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.sec{padding:115px 40px}
+.sec-dark{background:var(--navy);color:var(--white)}
+.sec-cream{background:var(--cream)}
+.sec-grad{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);color:var(--white)}
+.wrap{max-width:1200px;margin:0 auto}
+.tc{text-align:center}
+.lbl{font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.lbl::before{content:'';width:38px;height:1.5px;background:var(--gold);flex-shrink:0}
+.lbl.center{justify-content:center}
+.h2{font-family:'Playfair Display',serif;font-size:2.9rem;font-weight:700;line-height:1.22;margin-bottom:18px}
+.h2.light{color:var(--white)}.h2.dark{color:var(--dark)}
+.isub{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;font-style:italic;margin-bottom:26px}
+.isub.light{color:rgba(255,255,255,0.45)}.isub.dark{color:var(--light)}
+.btxt{font-size:1.04rem;line-height:1.9;max-width:800px}
+.btxt.light{color:rgba(255,255,255,0.58)}.btxt.dark{color:var(--mid)}
+.gld{width:56px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));margin:36px 0}
+.gld.center{margin-left:auto;margin-right:auto}
+
+.sr{opacity:0;transform:translateY(50px);transition:opacity 0.85s ease,transform 0.85s ease}
+.sr.on{opacity:1;transform:translateY(0)}
+.sr-l{opacity:0;transform:translateX(-65px);transition:opacity 0.85s ease,transform 0.85s ease}
+.sr-l.on{opacity:1;transform:translateX(0)}
+.sr-r{opacity:0;transform:translateX(65px);transition:opacity 0.85s ease,transform 0.85s ease}
+.sr-r.on{opacity:1;transform:translateX(0)}
+.sr-sc{opacity:0;transform:scale(0.88);transition:opacity 0.85s ease,transform 0.85s ease}
+.sr-sc.on{opacity:1;transform:scale(1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
+.about-img-wrap{position:relative}
+.about-frame{position:relative;max-width:420px}
+.about-frame::before{content:'';position:absolute;top:-15px;left:-15px;right:15px;bottom:15px;border:2px solid var(--gold);border-radius:12px;z-index:0;transition:var(--ease)}
+.about-img-wrap:hover .about-frame::before{top:-20px;left:-20px}
+.about-photo{width:100%;max-width:420px;border-radius:12px;position:relative;z-index:1;box-shadow:var(--shadow);object-fit:cover;aspect-ratio:3/4;transition:var(--ease)}
+.about-img-wrap:hover .about-photo{box-shadow:var(--shadowG)}
+.about-float{position:absolute;bottom:-22px;right:-22px;background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--navy);padding:22px 26px;border-radius:12px;z-index:2;box-shadow:var(--shadowG);text-align:center;transition:var(--ease)}
+.about-img-wrap:hover .about-float{transform:translateY(-5px)}
+.float-num{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:700;line-height:1}
+.float-txt{font-family:'Montserrat',sans-serif;font-size:0.57rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.about-text p{margin-bottom:18px}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+.stat{text-align:center;padding:22px 14px;background:var(--white);border-radius:12px;border:1px solid rgba(201,168,76,0.15);transition:var(--ease)}
+.stat:hover{transform:translateY(-5px);box-shadow:var(--shadowG);border-color:var(--gold)}
+.stat-icon{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:5px}
+.stat-label{font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:600;color:var(--light);letter-spacing:2px;text-transform:uppercase}
+
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:58px}
+.prob-card{background:rgba(201,168,76,0.03);border:1px solid rgba(201,168,76,0.1);border-radius:16px;padding:40px 30px;transition:var(--ease);position:relative;overflow:hidden}
+.prob-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.6s ease}
+.prob-card:hover::before{transform:scaleX(1)}
+.prob-card:hover{background:rgba(201,168,76,0.07);transform:translateY(-8px);box-shadow:0 22px 55px rgba(0,0,0,0.3)}
+.prob-ic{width:60px;height:60px;background:rgba(201,168,76,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:var(--ease)}
+.prob-card:hover .prob-ic{background:rgba(201,168,76,0.16);transform:scale(1.08)}
+.prob-ic i{font-size:1.2rem;color:var(--gold)}
+.prob-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--white);margin-bottom:13px}
+.prob-card p{font-size:0.92rem;color:rgba(255,255,255,0.46);line-height:1.8}
+
+.serve-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:58px}
+.serve-card{background:var(--white);border-radius:16px;padding:40px 36px;border:1px solid rgba(201,168,76,0.08);transition:var(--ease);position:relative;overflow:hidden}
+.serve-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transform:scaleX(0);transform-origin:left;transition:transform 0.5s ease}
+.serve-card:hover::after{transform:scaleX(1)}
+.serve-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(201,168,76,0.2)}
+.serve-ic{width:54px;height:54px;background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.04));border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:var(--ease)}
+.serve-card:hover .serve-ic{background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.08))}
+.serve-ic i{font-size:1.2rem;color:var(--gold)}
+.serve-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--dark);margin-bottom:13px}
+.serve-card p{font-size:0.93rem;color:var(--mid);line-height:1.8}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:58px}
+.svc-card{background:rgba(255,255,255,0.025);border:1px solid rgba(201,168,76,0.08);border-radius:18px;padding:42px 32px;transition:var(--ease);position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(201,168,76,0.04) 0%,transparent 100%);opacity:0;transition:opacity 0.5s ease}
+.svc-card:hover::before{opacity:1}
+.svc-card:hover{transform:translateY(-10px);border-color:rgba(201,168,76,0.28);box-shadow:0 30px 65px rgba(0,0,0,0.28)}
+.svc-num{font-family:'Playfair Display',serif;font-size:3.1rem;font-weight:700;color:rgba(201,168,76,0.07);line-height:1;margin-bottom:16px;position:relative;z-index:1}
+.svc-ic{width:50px;height:50px;background:rgba(201,168,76,0.08);border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative;z-index:1;transition:var(--ease)}
+.svc-card:hover .svc-ic{background:rgba(201,168,76,0.15)}
+.svc-ic i{font-size:1.15rem;color:var(--gold)}
+.svc-card h3{font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:600;color:var(--white);margin-bottom:13px;position:relative;z-index:1}
+.svc-card>p{font-size:0.86rem;color:rgba(255,255,255,0.46);line-height:1.8;position:relative;z-index:1;margin-bottom:14px}
+.svc-card ul{list-style:none;position:relative;z-index:1}
+.svc-card ul li{font-size:0.8rem;color:rgba(255,255,255,0.36);padding:4px 0 4px 18px;position:relative}
+.svc-card ul li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:0.48rem;top:7px}
+.svc-link{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase;transition:var(--ease);position:relative;z-index:1}
+.svc-link:hover{gap:13px}
+
+.auth-card{background:var(--white);border-radius:22px;overflow:hidden;border:1px solid rgba(201,168,76,0.08);transition:var(--ease);margin-bottom:50px}
+.auth-card:hover{box-shadow:var(--shadow);border-color:rgba(201,168,76,0.22)}
+.auth-layout{display:grid;grid-template-columns:300px 1fr}
+.auth-side{padding:46px 36px;display:flex;flex-direction:column;align-items:center;gap:14px;background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%)}
+.auth-photo-wrap{position:relative}
+.auth-photo{width:145px;height:145px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);box-shadow:0 12px 35px rgba(0,0,0,0.3);transition:var(--ease)}
+.auth-card:hover .auth-photo{transform:scale(1.06);box-shadow:0 15px 45px rgba(201,168,76,0.25)}
+.auth-tick{position:absolute;bottom:4px;right:4px;width:30px;height:30px;background:linear-gradient(135deg,var(--gold),var(--gold3));border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:0.7rem;border:3px solid var(--navy)}
+.auth-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--white);text-align:center}
+.auth-tag{display:inline-block;padding:5px 16px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:50px;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.auth-contacts{display:flex;flex-direction:column;gap:7px;width:100%}
+.auth-contact{display:flex;align-items:center;gap:9px;padding:9px 13px;background:rgba(255,255,255,0.04);border-radius:8px;transition:var(--ease)}
+.auth-contact:hover{background:rgba(201,168,76,0.08)}
+.auth-contact i{color:var(--gold);font-size:0.8rem;width:16px;text-align:center;flex-shrink:0}
+.auth-contact span{font-size:0.74rem;color:rgba(255,255,255,0.52);word-break:break-all}
+.book-area{margin-top:8px;text-align:center}
+.book-link{display:inline-block;transition:var(--ease);border-radius:8px;overflow:hidden}
+.book-link:hover{transform:scale(1.06) rotate(-2deg)}
+.book-cover{width:138px;height:auto;border-radius:8px;box-shadow:0 15px 42px rgba(0,0,0,0.4)}
+.amz-btn{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:9px 22px;background:#FF9900;border-radius:7px;transition:var(--ease)}
+.amz-btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(255,153,0,0.35)}
+.amz-btn i{color:#232F3E;font-size:1.05rem}
+.amz-btn span{font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;color:#232F3E;letter-spacing:1px;text-transform:uppercase}
+.auth-body{padding:46px 42px;display:flex;flex-direction:column;justify-content:center}
+.managed{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.14);border-radius:50px;margin-bottom:18px;width:fit-content}
+.managed i{color:var(--gold);font-size:0.66rem}
+.managed span{font-family:'Montserrat',sans-serif;font-size:0.56rem;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.auth-body h3{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:600;color:var(--dark);margin-bottom:16px;line-height:1.4}
+.auth-body p{font-size:0.93rem;color:var(--mid);line-height:1.9;margin-bottom:13px}
+.camp-box{margin-top:22px;padding:22px;background:var(--cream);border-radius:13px;border-left:3px solid var(--gold)}
+.camp-box h4{font-family:'Montserrat',sans-serif;font-size:0.63rem;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:13px}
+.camp-box ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.camp-box ul li{font-size:0.8rem;color:var(--mid);padding-left:18px;position:relative;line-height:1.6}
+.camp-box ul li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:0.46rem;top:4px}
+
+.timeline{position:relative;margin-top:75px}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(201,168,76,0.06));transform:translateX(-50%)}
+.t-step{display:grid;grid-template-columns:1fr 1fr;gap:78px;margin-bottom:78px;position:relative}
+.t-step::before{content:'';position:absolute;left:50%;top:28px;width:19px;height:19px;background:var(--gold);border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 6px rgba(201,168,76,0.15);z-index:2;transition:var(--ease)}
+.t-step:hover::before{box-shadow:0 0 0 10px rgba(201,168,76,0.2);transform:translateX(-50%) scale(1.15)}
+.t-num{font-family:'Playfair Display',serif;font-size:3.6rem;font-weight:700;color:rgba(201,168,76,0.1);line-height:1;margin-bottom:13px}
+.t-step h3{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:600;color:var(--white);margin-bottom:12px}
+.t-step p{font-size:0.93rem;color:rgba(255,255,255,0.46);line-height:1.8}
+.t-icon{font-size:2.4rem;color:var(--gold);margin-bottom:13px}
+.t-col{padding-top:8px}
+
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:58px}
+.why-card{padding:40px 36px;background:var(--white);border-radius:18px;border:1px solid rgba(201,168,76,0.08);transition:var(--ease);position:relative}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--gold);border-radius:4px 0 0 4px;transition:height 0.5s ease}
+.why-card:hover::before{height:100%}
+.why-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.why-ic{width:50px;height:50px;background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.04));border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:var(--ease)}
+.why-card:hover .why-ic{background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.08))}
+.why-ic i{font-size:1.15rem;color:var(--gold)}
+.why-card h3{font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:600;color:var(--dark);margin-bottom:13px}
+.why-card p{font-size:0.93rem;color:var(--mid);line-height:1.8}
+
+.pol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:58px}
+.pol-card{text-align:center;padding:38px 20px;background:rgba(255,255,255,0.025);border:1px solid rgba(201,168,76,0.08);border-radius:18px;transition:var(--ease)}
+.pol-card:hover{background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.24);transform:translateY(-8px)}
+.pol-card i{font-size:1.9rem;color:var(--gold);margin-bottom:18px;display:block}
+.pol-card h4{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:600;color:var(--white);margin-bottom:11px}
+.pol-card p{font-size:0.8rem;color:rgba(255,255,255,0.36);line-height:1.7}
+
+.commit-box{max-width:900px;margin:58px auto 0;padding:58px;background:linear-gradient(135deg,rgba(201,168,76,0.04),rgba(201,168,76,0.015));border:1px solid rgba(201,168,76,0.1);border-radius:22px;text-align:center;position:relative}
+.commit-box::before{content:'\201C';position:absolute;top:10px;left:28px;font-family:'Playfair Display',serif;font-size:5.5rem;color:rgba(201,168,76,0.07);line-height:1}
+.commit-box p{font-family:'Playfair Display',serif;font-size:1.22rem;color:var(--mid);line-height:2;font-style:italic;position:relative;z-index:1}
+.commit-sig{margin-top:30px;display:flex;align-items:center;justify-content:center;gap:14px}
+.commit-sig img{width:50px;height:50px;border-radius:50%;border:2px solid var(--gold);object-fit:cover}
+.sig-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--dark)}
+.sig-role{font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+
+.cta-layout{display:grid;grid-template-columns:auto 1fr;gap:58px;align-items:center}
+.cta-photo{width:195px;height:195px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);box-shadow:0 22px 55px rgba(0,0,0,0.3);transition:var(--ease)}
+.cta-photo:hover{transform:scale(1.05);box-shadow:var(--shadowG)}
+.cta-text h2{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.3}
+.cta-text p{font-size:1.04rem;color:rgba(255,255,255,0.5);line-height:1.9;margin-bottom:30px}
+.cta-btns{display:flex;gap:15px;flex-wrap:wrap}
+
+.contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:46px;margin-top:58px}
+.c-info{background:var(--white);border-radius:20px;padding:42px;border:1px solid rgba(201,168,76,0.08)}
+.c-info h3{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:600;color:var(--dark);margin-bottom:26px}
+.c-row{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid rgba(201,168,76,0.06)}
+.c-row:last-child{border-bottom:none}
+.c-ic{width:46px;height:46px;background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.c-ic i{color:var(--gold);font-size:0.92rem}
+.c-row h4{font-family:'Montserrat',sans-serif;font-size:0.64rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.c-row p,.c-row a{font-size:0.93rem;color:var(--mid);line-height:1.7}
+.c-row a:hover{color:var(--gold)}
+.c-form{background:var(--white);border-radius:20px;padding:42px;border:1px solid rgba(201,168,76,0.08)}
+.c-form h3{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:600;color:var(--dark);margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-family:'Montserrat',sans-serif;font-size:0.64rem;font-weight:600;color:var(--mid);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;padding:13px 17px;background:var(--cream);border:1.5px solid rgba(201,168,76,0.1);border-radius:9px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--dark);transition:var(--ease);outline:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,168,76,0.07);background:var(--white)}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--light)}
+.fg textarea{min-height:125px;resize:vertical}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-sub{width:100%;padding:17px;background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--navy);font-family:'Montserrat',sans-serif;font-size:0.74rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;border:none;border-radius:9px;cursor:pointer;transition:var(--ease);position:relative;overflow:hidden;margin-top:4px}
+.f-sub::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);transition:left 0.6s ease}
+.f-sub:hover::before{left:100%}
+.f-sub:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(201,168,76,0.38)}
+.f-note{text-align:center;font-size:0.7rem;color:var(--light);margin-top:14px}
+
+.footer{background:#060E1A;padding:78px 40px 32px;border-top:1px solid rgba(201,168,76,0.07)}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1.5fr;gap:46px;padding-bottom:52px;border-bottom:1px solid rgba(201,168,76,0.05)}
+.f-brand{display:flex;flex-direction:column;gap:16px}
+.f-logo{display:flex;align-items:center;gap:13px}
+.f-logo img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);object-fit:cover}
+.f-logo-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--gold)}
+.f-brand-desc{font-size:0.85rem;color:rgba(255,255,255,0.3);line-height:1.8}
+.f-col h4{font-family:'Montserrat',sans-serif;font-size:0.63rem;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:22px}
+.f-col ul{list-style:none}
+.f-col ul li{margin-bottom:10px}
+.f-col ul li a{font-size:0.82rem;color:rgba(255,255,255,0.36);transition:var(--ease)}
+.f-col ul li a:hover{color:var(--gold);padding-left:5px}
+.f-ci{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.f-ci i{color:var(--gold);font-size:0.8rem;width:16px;flex-shrink:0}
+.f-ci span,.f-ci a{font-size:0.82rem;color:rgba(255,255,255,0.36)}
+.f-ci a:hover{color:var(--gold)}
+.f-bottom{max-width:1200px;margin:26px auto 0;display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid rgba(201,168,76,0.04)}
+.f-copy{font-size:0.7rem;color:rgba(255,255,255,0.15)}
+.f-social{display:flex;gap:10px}
+.f-social a{width:36px;height:36px;border:1px solid rgba(201,168,76,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.22);font-size:0.82rem;transition:var(--ease)}
+.f-social a:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.f-policy{max-width:1200px;margin:0 auto;text-align:center;padding:22px 0}
+.f-policy p{font-size:0.74rem;color:rgba(255,255,255,0.16);line-height:1.8;max-width:700px;margin:0 auto}
+.btt{position:fixed;bottom:30px;right:30px;width:48px;height:48px;background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--navy);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;z-index:9998;opacity:0;visibility:hidden;transition:var(--ease);box-shadow:0 8px 28px rgba(201,168,76,0.28)}
+.btt.show{opacity:1;visibility:visible}
+.btt:hover{transform:translateY(-5px);box-shadow:0 15px 42px rgba(201,168,76,0.45)}
+
+@media(max-width:1100px){
+.hero h1{font-size:3rem}.h2{font-size:2.4rem}
+.svc-grid{grid-template-columns:repeat(2,1fr)}
+.auth-layout{grid-template-columns:1fr}.auth-side{min-width:auto}
+.timeline::before{left:28px}
+.t-step{grid-template-columns:1fr;gap:18px;padding-left:68px}
+.t-step::before{left:28px}
+.footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+.sec{padding:80px 22px}.hero{padding:108px 22px 65px}
+.hero h1{font-size:2.2rem}.hero-sub{font-size:1.05rem}.h2{font-size:1.95rem}
+.nav-inner{padding:0 22px}
+.nav-links{position:fixed;top:0;right:-100%;width:82%;height:100vh;background:rgba(10,22,40,0.98);backdrop-filter:blur(22px);flex-direction:column;justify-content:center;padding:60px 38px;transition:right 0.5s ease;gap:22px;box-shadow:-10px 0 40px rgba(0,0,0,0.3)}
+.nav-links.open{right:0}.hamburger{display:flex}
+.about-grid{grid-template-columns:1fr;gap:42px}
+.about-img-wrap{display:flex;justify-content:center}
+.serve-grid,.svc-grid,.prob-grid,.why-grid{grid-template-columns:1fr}
+.pol-grid{grid-template-columns:repeat(2,1fr)}
+.contact-layout{grid-template-columns:1fr}
+.f-row{grid-template-columns:1fr}
+.cta-layout{grid-template-columns:1fr;text-align:center}
+.cta-photo{margin:0 auto}.cta-btns{justify-content:center}
+.camp-box ul{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr}
+.f-bottom{flex-direction:column;gap:13px;text-align:center}
+}
+@media(max-width:480px){
+.hero h1{font-size:1.82rem}.h2{font-size:1.68rem}
+.hero-btns,.cta-btns{flex-direction:column;width:100%}
+.btn-gold,.btn-outline{width:100%;justify-content:center}
+.pol-grid,.about-stats{grid-template-columns:1fr}
+.commit-box{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+<img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire" class="pl-photo">
+<div class="pl-name">MADISON CLAIRE</div>
+<div class="pl-sub">Strategic Book Marketing</div>
+<div class="pl-track"><div class="pl-fill"></div></div>
+<div class="pl-pct" id="plPct">0%</div>
+</div>
+
+<nav class="navbar" id="navbar">
+<div class="nav-inner">
+<a href="#home" class="nav-brand">
+<img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire">
+<div class="nav-brand-text"><span class="name">Madison Claire</span><span class="sub">Book Marketing</span></div>
+</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="#home" onclick="closeNav()">Home</a></li>
+<li><a href="#about" onclick="closeNav()">About</a></li>
+<li><a href="#services" onclick="closeNav()">Services</a></li>
+<li><a href="#authors" onclick="closeNav()">Authors</a></li>
+<li><a href="#process" onclick="closeNav()">Process</a></li>
+<li><a href="#contact" onclick="closeNav()" class="nav-cta-btn">Contact</a></li>
+</ul>
+<div class="hamburger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</div>
+</nav>
+
+<section class="hero" id="home">
+<div id="particles"></div>
+<div class="hero-overlay"></div>
+<div class="hero-glow-bg"></div>
+<div class="hero-content">
+<div class="hero-badge"><div class="badge-dot"></div><span>Strategic Book Marketing Specialist</span></div>
+<h1>You Wrote the Book.<br>Now Let's Make Sure the<br><span>World Buys It.</span></h1>
+<p class="hero-sub">Most books fail not because they are bad — but because nobody knew they existed.</p>
+<p class="hero-desc">We take the book you have written and place it directly in front of the people who are already looking for exactly what you wrote. Strategic, structured, data-informed book marketing — executed with full documentation, complete transparency, and unwavering professionalism.</p>
+<div class="hero-btns">
+<a href="#contact" class="btn-gold"><i class="fas fa-paper-plane"></i> Submit Your Book for Review</a>
+<a href="#services" class="btn-outline"><i class="fas fa-briefcase"></i> Explore Services</a>
+</div>
+<div class="hero-email"><a href="mailto:madisonclaire051@gmail.com"><i class="fas fa-envelope"></i> madisonclaire051@gmail.com — All communication via email only</a></div>
+</div>
+<div class="hero-scroll"><span>Scroll</span><div class="scroll-bar"></div></div>
+</section>
+
+<div class="trust-bar"><div class="trust-track">
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Specialist Book Marketing</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Documented Communication</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Featured Author Placements</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Amazon Optimization</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Launch Campaign Management</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Indie & Traditional Authors</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Global Author Reach</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Transparent Reporting</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Specialist Book Marketing</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Documented Communication</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Featured Author Placements</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Amazon Optimization</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Launch Campaign Management</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Indie & Traditional Authors</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Global Author Reach</span></div>
+<div class="trust-item"><i class="fas fa-check-circle"></i><span>Transparent Reporting</span></div>
+</div></div>
+
+<section class="sec sec-cream" id="about">
+<div class="wrap"><div class="about-grid">
+<div class="about-img-wrap sr-l">
+<div class="about-frame">
+<img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire" class="about-photo">
+<div class="about-float"><div class="float-num">100%</div><div class="float-txt">Email Documented</div></div>
+</div>
+</div>
+<div class="sr-r">
+<div class="lbl">About Madison Claire</div>
+<h2 class="h2 dark">The Specialist Behind<br>Your Book's Success</h2>
+<div class="gld"></div>
+<p class="btxt dark">Madison Claire is a dedicated Book Specialist Marketer who has built her career on one unwavering principle — every book that deserves to be read deserves to be found. With deep expertise in the publishing industry, reader psychology, platform algorithms, and strategic sales copywriting, Madison brings a level of specialized knowledge that general marketing agencies simply cannot replicate.</p>
+<p class="btxt dark" style="margin-top:16px">Unlike generalists who offer book marketing as one of many services, Madison focuses exclusively on book marketing — understanding the unique dynamics of how readers discover, evaluate, and purchase books across genres and platforms. Every strategy she builds is rooted in this specialized understanding.</p>
+<p class="btxt dark" style="margin-top:16px">All communication is conducted exclusively via email — ensuring that every strategy, every decision, and every result is fully documented, accountable, and professionally managed from start to finish.</p>
+<div class="about-stats">
+<div class="stat sr d1"><div class="stat-icon">✦</div><div class="stat-label">Book Specialist</div></div>
+<div class="stat sr d2"><div class="stat-icon">✦</div><div class="stat-label">Global Reach</div></div>
+<div class="stat sr d3"><div class="stat-icon">✦</div><div class="stat-label">Fully Documented</div></div>
+</div>
+</div>
+</div></div>
+</section>
+
+<section class="sec sec-dark">
+<div class="wrap">
+<div class="sr"><div class="lbl">The Truth</div><h2 class="h2 light">The Painful Truth About Book Marketing<br>That Nobody Tells Authors</h2><p class="isub light">Publishing a book is not the same as marketing a book.</p><p class="btxt light">The best-selling books in the world are not always the best-written. They are the best-marketed. The difference between a book that sells ten copies and one that sells ten thousand is almost always the quality of the marketing behind it.</p></div>
+<div class="prob-grid">
+<div class="prob-card sr d1"><div class="prob-ic"><i class="fas fa-eye-slash"></i></div><h3>Invisible Books</h3><p>Thousands of brilliant books are published daily and never found by the readers who would love them — simply because nobody told those readers the book existed.</p></div>
+<div class="prob-card sr d2"><div class="prob-ic"><i class="fas fa-chart-line"></i></div><h3>No Strategy</h3><p>Most authors publish and wait for sales that never come. Without a strategic marketing plan, even extraordinary books struggle to find their audience in the noise.</p></div>
+<div class="prob-card sr d3"><div class="prob-ic"><i class="fas fa-search"></i></div><h3>Wrong Positioning</h3><p>Books not correctly positioned with the right keywords and categories are essentially invisible to Amazon's algorithm and the millions of readers who use it every day.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-cream">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Who We Serve</div><h2 class="h2 dark">We Work With Authors Who Take<br>Their Books Seriously</h2><p class="isub dark">Professional marketing for authors who believe in what they have written.</p></div>
+<div class="serve-grid">
+<div class="serve-card sr d1"><div class="serve-ic"><i class="fas fa-feather-pointed"></i></div><h3>Indie Authors</h3><p>You chose independence — and with it, the full weight of marketing. We give indie authors the same caliber of strategic marketing that major publishers provide to their top-selling authors. You wrote independently — you do not have to market alone.</p></div>
+<div class="serve-card sr d2"><div class="serve-ic"><i class="fas fa-building-columns"></i></div><h3>Traditional Authors</h3><p>Traditional publishing gives distribution but not always deep marketing attention. We fill that gap — building strategies that maximize your publisher's efforts and ensure your book reaches its full sales potential.</p></div>
+<div class="serve-card sr d3"><div class="serve-ic"><i class="fas fa-upload"></i></div><h3>Self-Published Authors</h3><p>The authors who succeed in self-publishing are the ones who approach their book like a business. If you are ready to treat your book like the commercial product it is — we are the marketing partner you need.</p></div>
+<div class="serve-card sr d4"><div class="serve-ic"><i class="fas fa-layer-group"></i></div><h3>Multi-Title &amp; First-Time Authors</h3><p>Whether you have a growing catalogue needing cohesive strategy or you are launching your debut and need the first 90 days right — we build the strategy that makes success measurable.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-grad" id="services">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Our Services</div><h2 class="h2 light">Professional Book Marketing Services<br>That Actually Move Copies</h2><p class="isub light">Every service built around one outcome — your book in the hands of the readers it was written for.</p></div>
+<div class="svc-grid">
+<div class="svc-card sr d1"><div class="svc-num">01</div><div class="svc-ic"><i class="fas fa-rocket"></i></div><h3>Complete Book Launch</h3><p>From pre-launch through 30 days post-launch — maximum impact and sustained momentum.</p><ul><li>Pre-launch market analysis</li><li>Target reader profiling</li><li>Amazon listing optimization</li><li>3-part email campaign</li><li>Launch day execution plan</li><li>30-day performance report</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+<div class="svc-card sr d2"><div class="svc-num">02</div><div class="svc-ic"><i class="fab fa-amazon"></i></div><h3>Amazon Optimization</h3><p>Transform your Amazon listing into an active 24/7 sales tool that converts browsers into buyers.</p><ul><li>Full listing audit</li><li>Comprehensive keyword research</li><li>Category optimization</li><li>Sales description rewrite</li><li>Backend keyword strategy</li><li>A+ content recommendations</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+<div class="svc-card sr d3"><div class="svc-num">03</div><div class="svc-ic"><i class="fas fa-bullhorn"></i></div><h3>Visibility Campaign</h3><p>30-day targeted campaign placing your book in front of active genre-specific book buyers.</p><ul><li>Audience deep dive research</li><li>Multi-channel strategy</li><li>Email marketing campaign</li><li>Featured platform placement</li><li>Weekly progress updates</li><li>End-of-campaign report</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+<div class="svc-card sr d4"><div class="svc-num">04</div><div class="svc-ic"><i class="fas fa-palette"></i></div><h3>Author Branding</h3><p>Build a compelling author brand that makes you recognizable, trusted, and followed from book to book.</p><ul><li>Complete brand audit</li><li>Positioning statement</li><li>Professional bio development</li><li>Messaging &amp; voice guide</li><li>Audience alignment analysis</li><li>Brand application roadmap</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+<div class="svc-card sr d5"><div class="svc-num">05</div><div class="svc-ic"><i class="fas fa-trophy"></i></div><h3>Featured Placement</h3><p>Premium visibility on our platform as a must-read author in front of active book buyers.</p><ul><li>Dedicated author profile</li><li>Strategic positioning statement</li><li>Compelling book presentation</li><li>Direct purchase links</li><li>30 or 60-day placement</li><li>Placement performance report</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+<div class="svc-card sr d6"><div class="svc-num">06</div><div class="svc-ic"><i class="fas fa-calendar-check"></i></div><h3>Monthly Retainer</h3><p>Sustained, fully managed marketing every month with dedicated specialist attention.</p><ul><li>Monthly strategy review</li><li>Ongoing Amazon monitoring</li><li>Monthly email campaigns</li><li>Visibility maintenance</li><li>Priority communication</li><li>Monthly performance report</li></ul><a href="mailto:madisonclaire051@gmail.com" class="svc-link">Inquire <i class="fas fa-arrow-right"></i></a></div>
+</div>
+<div class="sr tc" style="margin-top:58px"><p style="color:rgba(255,255,255,0.36);font-size:0.88rem;margin-bottom:24px">To discuss any service in detail — message us directly via email.</p><a href="mailto:madisonclaire051@gmail.com" class="btn-gold"><i class="fas fa-envelope"></i> Message Us About Your Book</a></div>
+</div>
+</section>
+
+<section class="sec sec-cream" id="authors">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Featured Authors</div><h2 class="h2 dark">Authors Who Trusted Us With<br>Their Most Important Work</h2><p class="isub dark">Strategic marketing in practice — real authors, real partnerships, real results.</p><div class="gld center"></div></div>
+
+<div class="auth-card sr">
+<div class="auth-layout">
+<div class="auth-side">
+<div class="auth-photo-wrap">
+<img src="https://p16-common-sign.tiktokcdn.com/tos-maliva-avt-0068/aab01655a64531592fdf88b0a8ef4673~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=927e2c29&x-expires=1777035600&x-signature=UVO8vKLU3WWhRARAVnSFCJZ7hes%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2" alt="Emily Winfield Martin" class="auth-photo">
+<div class="auth-tick"><i class="fas fa-check"></i></div>
+</div>
+<h3 class="auth-name">Emily Winfield Martin</h3>
+<span class="auth-tag">Published Author</span>
+<div class="auth-contacts"><a href="https://tiktok.com/@authoremilywinfield" target="_blank" class="auth-contact"><i class="fab fa-tiktok"></i><span>@authoremilywinfield</span></a></div>
+<div class="book-area">
+<a href="https://www.amazon.com" target="_blank" class="book-link"><img src="https://m.media-amazon.com/images/I/41atXuYFK-L._SX342_SY445_FMwebp_.jpg" alt="Emily's Book" class="book-cover"></a>
+<a href="https://www.amazon.com" target="_blank" class="amz-btn"><i class="fab fa-amazon"></i><span>Buy on Amazon</span></a>
+</div>
+</div>
+<div class="auth-body">
+<div class="managed"><i class="fas fa-shield-halved"></i><span>Marketed by Madison Claire</span></div>
+<h3>A Voice That Captivates Readers Across Generations</h3>
+<p>Emily Winfield Martin is a celebrated author whose work resonates with deep emotional intelligence and literary craftsmanship. Her books speak to readers on a level that transcends age — creating stories that linger in the imagination long after the last page is turned.</p>
+<p>Through strategic marketing and professional positioning, Emily's work has been placed in front of the readers who connect most deeply with her unique voice and storytelling style — turning passive browsers into passionate fans and loyal buyers.</p>
+<div class="camp-box"><h4>Campaign Highlights</h4><ul><li>Amazon listing fully optimized</li><li>Target reader profile developed</li><li>Strategic visibility campaign executed</li><li>Professional email campaign distributed</li><li>Author brand positioning implemented</li><li>Featured placement secured</li></ul></div>
+</div>
+</div>
+</div>
+
+<div class="auth-card sr">
+<div class="auth-layout">
+<div class="auth-side">
+<div class="auth-photo-wrap">
+<img src="https://m.media-amazon.com/images/S/amzn-author-media-prod/7o7uv5f5dq8hgfmfka20vlta47._SY600_._SL200_._PQ50_._FMwebp_.jpg" alt="Kate Cullen" class="auth-photo">
+<div class="auth-tick"><i class="fas fa-check"></i></div>
+</div>
+<h3 class="auth-name">Kate Cullen</h3>
+<span class="auth-tag">Published Author</span>
+<div class="auth-contacts"><a href="mailto:katecullen473@gmail.com" class="auth-contact"><i class="fas fa-envelope"></i><span>katecullen473@gmail.com</span></a></div>
+<div class="book-area">
+<a href="https://www.amazon.com" target="_blank" class="book-link"><img src="https://m.media-amazon.com/images/I/71YYI5oF-3L._SY425_.jpg" alt="Kate's Book" class="book-cover"></a>
+<a href="https://www.amazon.com" target="_blank" class="amz-btn"><i class="fab fa-amazon"></i><span>Buy on Amazon</span></a>
+</div>
+</div>
+<div class="auth-body">
+<div class="managed"><i class="fas fa-shield-halved"></i><span>Marketed by Madison Claire</span></div>
+<h3>Compelling Stories That Readers Cannot Put Down</h3>
+<p>Kate Cullen is a talented author whose writing demonstrates a remarkable ability to create worlds that readers want to inhabit and characters they cannot forget. Her commitment to her craft is matched only by her dedication to reaching the readers who will love her work most.</p>
+<p>Through comprehensive marketing strategy including Amazon optimization, targeted visibility campaigns, and professional author brand positioning, Kate's book has been strategically placed in front of exactly the right audience — converting interest into purchases and building a loyal readership.</p>
+<div class="camp-box"><h4>Campaign Highlights</h4><ul><li>Complete Amazon page optimization</li><li>Sales-driven description rewrite</li><li>Strategic visibility campaign launched</li><li>Targeted email marketing executed</li><li>Author brand identity developed</li><li>Featured author placement secured</li></ul></div>
+</div>
+</div>
+</div>
+
+<div class="auth-card sr">
+<div class="auth-layout">
+<div class="auth-side">
+<div class="auth-photo-wrap">
+<img src="https://m.media-amazon.com/images/S/amzn-author-media-prod/u3s2ssa4irudks15rt5o8pnfc4._SY600_._SL200_._PQ50_._FMwebp_.jpg" alt="James Victor" class="auth-photo">
+<div class="auth-tick"><i class="fas fa-check"></i></div>
+</div>
+<h3 class="auth-name">James Victor</h3>
+<span class="auth-tag">Published Author</span>
+<div class="auth-contacts"><a href="mailto:jamesdavidvictor6@gmail.com" class="auth-contact"><i class="fas fa-envelope"></i><span>jamesdavidvictor6@gmail.com</span></a></div>
+<div class="book-area">
+<a href="https://www.amazon.com" target="_blank" class="book-link"><img src="https://m.media-amazon.com/images/I/810znVQrFbL._SY425_.jpg" alt="James's Book" class="book-cover"></a>
+<a href="https://www.amazon.com" target="_blank" class="amz-btn"><i class="fab fa-amazon"></i><span>Buy on Amazon</span></a>
+</div>
+</div>
+<div class="auth-body">
+<div class="managed"><i class="fas fa-shield-halved"></i><span>Marketed by Madison Claire</span></div>
+<h3>Bold Writing That Commands Attention and Drives Sales</h3>
+<p>James Victor is an author whose bold, distinctive voice cuts through the noise of a crowded marketplace. His writing carries a confidence and authenticity that resonates deeply with readers looking for something genuine, powerful, and unforgettable.</p>
+<p>Through a comprehensive marketing partnership with Madison Claire Book Marketing, James's work has been strategically positioned, professionally presented, and actively promoted to a targeted audience — resulting in meaningful visibility growth and consistent sales momentum.</p>
+<div class="camp-box"><h4>Campaign Highlights</h4><ul><li>Full marketing strategy developed</li><li>Amazon listing professionally optimized</li><li>Multi-channel visibility campaign</li><li>Professional email outreach executed</li><li>Complete author brand positioning</li><li>Featured placement on platform</li></ul></div>
+</div>
+</div>
+</div>
+
+<div class="sr tc" style="margin-top:38px">
+<h3 style="font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--dark);margin-bottom:13px">Your Book Could Be Featured Here.</h3>
+<p style="font-size:0.98rem;color:var(--mid);max-width:600px;margin:0 auto 26px;line-height:1.8">Message us directly to discuss how featured placement works and what it can do for your book.</p>
+<a href="mailto:madisonclaire051@gmail.com" class="btn-gold" style="background:linear-gradient(135deg,var(--navy),var(--navy2));color:var(--gold)"><i class="fas fa-star"></i> Apply for Featured Placement</a>
+</div>
+</div>
+</section>
+
+<section class="sec sec-dark" id="process">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">How It Works</div><h2 class="h2 light">A Process Built on Clarity,<br>Documentation &amp; Accountability</h2><p class="isub light">Every step structured, documented, and professionally managed from start to finish.</p></div>
+<div class="timeline">
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-num">01</div><h3>Submit Your Inquiry</h3><p>Send an email with your book title, genre, current situation, and goals. Every inquiry is personally read by Madison Claire. You receive acknowledgment within 24 hours.</p></div><div class="t-col"><div class="t-icon"><i class="fas fa-paper-plane"></i></div><p style="color:rgba(255,255,255,0.25);font-size:0.8rem;margin-top:8px">📧 madisonclaire051@gmail.com</p></div></div>
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-icon"><i class="fas fa-magnifying-glass-chart"></i></div></div><div class="t-col"><div class="t-num">02</div><h3>We Study Your Book &amp; Market</h3><p>Thorough review of your Amazon listing, genre marketplace, target reader profile, and the gap between where your book stands and where strategic marketing could take it.</p></div></div>
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-num">03</div><h3>Custom Strategy Proposal</h3><p>A tailored strategy proposal with recommended services, scope of work, timeline, and communication schedule. No pressure. No rush. Take the time you need.</p></div><div class="t-col"><div class="t-icon"><i class="fas fa-file-lines"></i></div></div></div>
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-icon"><i class="fas fa-handshake"></i></div></div><div class="t-col"><div class="t-num">04</div><h3>Approve &amp; Begin</h3><p>Formal service agreement, invoice, and project kickoff confirmation — all via email. Complete documentation. Your project begins within 1–2 business days.</p></div></div>
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-num">05</div><h3>Campaign Execution</h3><p>Every action guided by the approved strategy. Regular progress updates, approval requests, and fully transparent communication throughout the entire campaign.</p></div><div class="t-col"><div class="t-icon"><i class="fas fa-gears"></i></div></div></div>
+<div class="t-step sr"><div class="t-col" style="text-align:right"><div class="t-icon"><i class="fas fa-chart-column"></i></div></div><div class="t-col"><div class="t-num">06</div><h3>Performance Report Delivered</h3><p>Comprehensive report documenting every action, every result, honest assessment, strategic insights, and recommended next steps — delivered to your inbox.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-cream">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Why Choose Us</div><h2 class="h2 dark">What Separates Madison Claire<br>From Every Other Option</h2><p class="isub dark">Specialized knowledge that general marketers simply cannot replicate.</p></div>
+<div class="why-grid">
+<div class="why-card sr d1"><div class="why-ic"><i class="fas fa-book-open"></i></div><h3>Book Specialist — Not Generalist</h3><p>Book marketing is all we do. We understand genres, reader discovery, Amazon algorithms, and launch sequencing at a depth that general agencies cannot match.</p></div>
+<div class="why-card sr d2"><div class="why-ic"><i class="fas fa-file-contract"></i></div><h3>Everything Documented — Always</h3><p>All business conducted exclusively via email. Every strategy, proposal, agreement, update, and report exists in writing. Complete, timestamped accountability.</p></div>
+<div class="why-card sr d3"><div class="why-ic"><i class="fas fa-user-check"></i></div><h3>Individual Attention — Not Volume</h3><p>We work with a select number of authors at any time. Every project receives full strategic depth. Your book gets dedicated, personalized expertise.</p></div>
+<div class="why-card sr d4"><div class="why-ic"><i class="fas fa-chart-pie"></i></div><h3>Results Measured &amp; Reported</h3><p>Every campaign ends with a comprehensive performance report. What was executed, results achieved, and intelligent next steps for continued growth.</p></div>
+<div class="why-card sr d5"><div class="why-ic"><i class="fas fa-brain"></i></div><h3>We Know What Sells Books</h3><p>Reader psychology, platform behavior, sales copywriting, audience targeting, and conversion optimization — the exact disciplines that move books.</p></div>
+<div class="why-card sr d6"><div class="why-ic"><i class="fas fa-gem"></i></div><h3>Professional From Start to Finish</h3><p>Every interaction handled with care, thoroughness, and expertise. We respond promptly, communicate clearly, and deliver what we promise.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-dark">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Our Standard</div><h2 class="h2 light">Why Every Communication<br>Happens by Email</h2><p class="isub light">Documentation is the highest professional standard we can offer you.</p></div>
+<div class="pol-grid">
+<div class="pol-card sr d1"><i class="fas fa-folder-open"></i><h4>Full Documentation</h4><p>Every promise, strategy, and deliverable exists in writing. Nothing verbal. Nothing forgotten.</p></div>
+<div class="pol-card sr d2"><i class="fas fa-shield-halved"></i><h4>Complete Accountability</h4><p>Searchable, timestamped record of every action, update, and result. No ambiguity.</p></div>
+<div class="pol-card sr d3"><i class="fas fa-lock"></i><h4>Project Protection</h4><p>Written communication protects both parties with documented agreements and records.</p></div>
+<div class="pol-card sr d4"><i class="fas fa-inbox"></i><h4>Permanent Access</h4><p>Your inbox is a permanent archive. Every strategy decision always accessible and searchable.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-cream">
+<div class="wrap">
+<div class="commit-box sr-sc">
+<p>When you bring your book to Madison Claire Book Marketing, you are entering into a professional partnership with a specialist genuinely invested in your book's success. We commit to studying your book with the same care you put into writing it. We commit to building a strategy designed specifically for your title. We commit to executing with full professionalism. And we commit to delivering honest, transparent reporting on everything your campaign produced.</p>
+<p style="margin-top:18px">Your book took months — perhaps years — of your life to complete. It deserves marketing that matches the magnitude of that investment.</p>
+<div class="commit-sig">
+<img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire">
+<div><div class="sig-name">Madison Claire</div><div class="sig-role">Book Specialist Marketer</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-dark">
+<div class="wrap">
+<div class="cta-layout sr">
+<img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire" class="cta-photo">
+<div class="cta-text">
+<h2>Your Book Is Ready.<br>Its Readers Are Waiting.<br><span style="color:var(--gold)">Let's Connect Them.</span></h2>
+<p>The gap between where your book is right now and where it could be is not a writing problem. It is a marketing problem. And marketing problems have solutions — strategic, structured, professionally executed solutions. The first email costs you nothing. But not sending it could cost your book everything.</p>
+<div class="cta-btns">
+<a href="#contact" class="btn-gold"><i class="fas fa-paper-plane"></i> Submit Your Book Now</a>
+<a href="mailto:madisonclaire051@gmail.com" class="btn-outline"><i class="fas fa-envelope"></i> Email Directly</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-cream" id="contact">
+<div class="wrap">
+<div class="sr tc"><div class="lbl center">Contact Us</div><h2 class="h2 dark">Your Book Has a Story Worth Telling.<br>We're Here to Make Sure It's Heard.</h2><p class="isub dark">The distance between where your book is and where it could be is one email away.</p><div class="gld center"></div></div>
+<div class="contact-layout">
+<div class="c-info sr-l">
+<h3>Reach Us Directly</h3>
+<div class="c-row"><div class="c-ic"><i class="fas fa-envelope"></i></div><div><h4>Business Email</h4><a href="mailto:madisonclaire051@gmail.com">madisonclaire051@gmail.com</a></div></div>
+<div class="c-row"><div class="c-ic"><i class="fas fa-clock"></i></div><div><h4>Response Time</h4><p>All inquiries receive a personal response within 24–48 business hours, Monday through Friday.</p></div></div>
+<div class="c-row"><div class="c-ic"><i class="fas fa-file-shield"></i></div><div><h4>Communication Policy</h4><p>All client communication is conducted exclusively via email — ensuring full documentation, accountability, and transparency.</p></div></div>
+<div class="c-row"><div class="c-ic"><i class="fas fa-tags"></i></div><div><h4>Service Information</h4><p>To receive detailed information about any service — message us directly. We respond with everything you need.</p></div></div>
+</div>
+<div class="c-form sr-r">
+<h3>Tell Us About Your Book</h3>
+<form action="https://formspree.io/f/xojykggo" method="POST" id="myForm">
+<div class="f-row"><div class="fg"><label>Full Name *</label><input type="text" name="name" required placeholder="Your full name"></div><div class="fg"><label>Author Name</label><input type="text" name="author_name" placeholder="If different from above"></div></div>
+<div class="fg"><label>Email Address *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+<div class="f-row"><div class="fg"><label>Book Title *</label><input type="text" name="book_title" required placeholder="Your book title"></div><div class="fg"><label>Genre *</label><select name="genre" required><option value="">Select genre...</option><option>Romance</option><option>Thriller / Suspense</option><option>Mystery</option><option>Fantasy / Sci-Fi</option><option>Literary Fiction</option><option>Self-Help</option><option>Business</option><option>Christian Fiction</option><option>Biography / Memoir</option><option>Young Adult</option><option>Children's</option><option>Horror</option><option>Historical Fiction</option><option>Other</option></select></div></div>
+<div class="f-row"><div class="fg"><label>Publishing Status *</label><select name="publishing_status" required><option value="">Select status...</option><option>Pre-Launch</option><option>Newly Published (0-3 months)</option><option>Published (3-12 months)</option><option>Established (1+ years)</option><option>Multiple Titles</option></select></div><div class="fg"><label>Service Interest</label><select name="service_interest"><option value="">Select service...</option><option>Book Launch Management</option><option>Amazon Optimization</option><option>Visibility Campaign</option><option>Author Branding</option><option>Featured Placement</option><option>Monthly Retainer</option><option>Need your recommendation</option></select></div></div>
+<div class="fg"><label>Tell Us About Your Book &amp; Goals *</label><textarea name="message" required placeholder="Describe your book, your current marketing situation, what you want to achieve, and any challenges or deadlines..."></textarea></div>
+<button type="submit" class="f-sub"><i class="fas fa-paper-plane"></i>&nbsp; Submit Your Inquiry</button>
+<p class="f-note">Your information is kept strictly confidential. We respond within 24–48 business hours.</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-grid">
+<div class="f-brand">
+<div class="f-logo"><img src="https://lh3.googleusercontent.com/a/ACg8ocLHbCcsA-nygEiX3Tsg_DlyvfsWu4MJyFh-cLU6RFnS_Gtqfs8=s288-c-no" alt="Madison Claire"><span class="f-logo-name">Madison Claire</span></div>
+<p class="f-brand-desc">The Authority in Strategic Book Marketing for Indie, Traditional, and Self-Published Authors Worldwide. Every project fully documented. Every result transparently reported.</p>
+</div>
+<div class="f-col"><h4>Navigation</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#authors">Featured Authors</a></li><li><a href="#process">How It Works</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div class="f-col"><h4>Services</h4><ul><li><a href="#services">Book Launch Management</a></li><li><a href="#services">Amazon Optimization</a></li><li><a href="#services">Visibility Campaigns</a></li><li><a href="#services">Author Branding</a></li><li><a href="#services">Featured Placement</a></li><li><a href="#services">Monthly Retainer</a></li></ul></div>
+<div class="f-col"><h4>Contact</h4><div class="f-ci"><i class="fas fa-envelope"></i><a href="mailto:madisonclaire051@gmail.com">madisonclaire051@gmail.com</a></div><div class="f-ci"><i class="fas fa-clock"></i><span>24–48 Business Hour Response</span></div><div class="f-ci"><i class="fas fa-calendar-days"></i><span>Monday Through Friday</span></div><div class="f-ci"><i class="fas fa-file-shield"></i><span>Email-Only Communication</span></div></div>
+</div>
+<div class="f-policy"><p>All client communication, project management, strategy development, and reporting at Madison Claire Book Marketing is conducted exclusively via email — ensuring every project is fully documented, every commitment is accountable, and every author has a complete permanent record of everything agreed upon and delivered.</p></div>
+<div class="f-bottom"><span class="f-copy">&copy; 2025 Madison Claire Book Marketing. All Rights Reserved.</span><div class="f-social"><a href="mailto:madisonclaire051@gmail.com" title="Email"><i class="fas fa-envelope"></i></a></div></div>
+</footer>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+(function(){
+var pct=document.getElementById('plPct'),n=0;
+var iv=setInterval(function(){n+=Math.floor(Math.random()*4)+1;if(n>=100){n=100;clearInterval(iv)}if(pct)pct.textContent=n+'%'},40);
+window.addEventListener('load',function(){setTimeout(function(){var p=document.getElementById('preloader');if(p)p.classList.add('hide')},2600)});
+})();
+(function(){
+var f=document.getElementById('particles');if(!f)return;
+for(var i=0;i<50;i++){var d=document.createElement('div');d.className='dot';var s=(Math.random()*3+1)+'px';d.style.cssText='width:'+s+';height:'+s+';left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*18+12)+'s;animation-delay:'+(Math.random()*15)+'s;opacity:'+(Math.random()*0.4+0.1);f.appendChild(d)}
+})();
+var nav=document.getElementById('navbar'),btt=document.getElementById('btt');
+window.addEventListener('scroll',function(){var s=window.pageYOffset;if(nav){if(s>80)nav.classList.add('scrolled');else nav.classList.remove('scrolled')}if(btt){if(s>600)btt.classList.add('show');else btt.classList.remove('show')}},{passive:true});
+function toggleNav(){var n=document.getElementById('navLinks'),b=document.getElementById('burger');if(n)n.classList.toggle('open');if(b)b.classList.toggle('open')}
+function closeNav(){var n=document.getElementById('navLinks'),b=document.getElementById('burger');if(n)n.classList.remove('open');if(b)b.classList.remove('open')}
+function doReveal(){var a=document.querySelectorAll('.sr,.sr-l,.sr-r,.sr-sc'),w=window.innerHeight;for(var i=0;i<a.length;i++){if(a[i].getBoundingClientRect().top<w-90)a[i].classList.add('on')}}
+window.addEventListener('scroll',doReveal,{passive:true});
+window.addEventListener('load',function(){setTimeout(doReveal,400)});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=this.getAttribute('href');if(id==='#')return;var t=document.querySelector(id);if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})}})});
+var g=document.querySelector('.hero-glow-bg');
+window.addEventListener('scroll',function(){if(g&&window.pageYOffset<window.innerHeight)g.style.transform='translateX(-50%) translateY('+window.pageYOffset*0.24+'px)'},{passive:true});
+var form=document.getElementById('myForm');
+if(form)form.addEventListener('submit',function(){var b=form.querySelector('.f-sub');if(b){b.textContent='Sending...';b.style.opacity='0.7';b.disabled=true}});
+</script>
+</body>
+</html>
